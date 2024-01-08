@@ -33,7 +33,7 @@ def main():
     val_dataloader = DataLoader(val_dataset, num_workers=opt.workers, pin_memory=True, batch_size=1)
 
     if opt.conv_type == '1D':
-        model = getattr(model_1d, opt.model)( in_dim=opt.in_planes, embedding_size=opt.embd_dim, hidden_dim=opt.hidden_dim).cuda() # tdnn, ecapa_tdnn
+        model = getattr(model_1d, opt.model)( in_dim=opt.in_planes, embedding_size=opt.embd_dim, hidden_dim=opt.hidden_dim).cuda(device='cuda:0') # tdnn, ecapa_tdnn
     elif opt.conv_type == '2D':
         model = getattr(model_2d, opt.model)( in_planes=opt.in_planes, embedding_size=opt.embd_dim).cuda() # resnet
 
