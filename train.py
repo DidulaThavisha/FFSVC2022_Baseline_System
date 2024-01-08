@@ -35,7 +35,7 @@ def main():
     if opt.conv_type == '1D':
         model = getattr(model_1d, opt.model)( in_dim=opt.in_planes, embedding_size=opt.embd_dim, hidden_dim=opt.hidden_dim).cuda(device='cuda:0') # tdnn, ecapa_tdnn
     elif opt.conv_type == '2D':
-        model = getattr(model_2d, opt.model)( in_planes=opt.in_planes, embedding_size=opt.embd_dim).cuda() # resnet
+        model = getattr(model_2d, opt.model)( in_planes=opt.in_planes, embedding_size=opt.embd_dim).cuda(device='cuda:0') # resnet
 
     classifier = getattr(classifiers, opt.classifier)(opt.embd_dim, len(opt.spk2int),
                                       device_id=[i for i in range(len(opt.gpu.split(',')))],
