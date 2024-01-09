@@ -3,7 +3,7 @@ class Config(object):
     train_dir = 'Vox2dev'
     val_dir = 'Vox1-O'
     
-    workers = 10
+    workers = 4
     batch_size = 128
     max_frames = 200
     
