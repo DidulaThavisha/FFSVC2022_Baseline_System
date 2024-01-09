@@ -38,7 +38,7 @@ class Config(object):
     load_classifir = False
     
     seed = 3007
-    gpu = '4,5'
+    gpu = '0,1'
     
     utt2wav = [line.split() for line in open('data/%s/wav.scp' % train_dir)]
     spk2int = {line.split()[0]:i for i, line in enumerate(open('data/%s/spk2utt' % train_dir))}
