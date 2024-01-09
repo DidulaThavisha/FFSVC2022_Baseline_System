@@ -35,7 +35,7 @@ class Config(object):
     epochs = 100
     #start_epoch = 40
     start_epoch = 38
-    load_classifir = False
+    load_classifier = False
     
     seed = 3007
     gpu = '0,1'
