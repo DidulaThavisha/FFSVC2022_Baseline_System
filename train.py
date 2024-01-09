@@ -35,13 +35,13 @@ def main():
     if opt.conv_type == '1D':
         model = getattr(model_1d, opt.model)( in_dim=opt.in_planes, embedding_size=opt.embd_dim, hidden_dim=opt.hidden_dim).cuda(device='cuda:0') # tdnn, ecapa_tdnn
     elif opt.conv_type == '2D':
-        model = getattr(model_2d, opt.model)( in_planes=opt.in_planes, embedding_size=opt.embd_dim) # resnet
-        #model = getattr(model_2d, opt.model)( in_planes=opt.in_planes, embedding_size=opt.embd_dim).cuda() # resnet
+        #model = getattr(model_2d, opt.model)( in_planes=opt.in_planes, embedding_size=opt.embd_dim) # resnet
+        model = getattr(model_2d, opt.model)( in_planes=opt.in_planes, embedding_size=opt.embd_dim).cuda() # resnet
 
     classifier = getattr(classifiers, opt.classifier)(opt.embd_dim, len(opt.spk2int),
                                       device_id=[i for i in range(len(opt.gpu.split(',')))],
-                                      m=opt.angular_m, s=opt.angular_s) # arcface
-                                      #m=opt.angular_m, s=opt.angular_s).cuda()   
+                                      #m=opt.angular_m, s=opt.angular_s) # arcface
+                                      m=opt.angular_m, s=opt.angular_s).cuda()   
 
     os.system('mkdir -p exp/%s' % opt.save_dir)
     
@@ -57,8 +57,8 @@ def main():
         logs = open('exp/%s/train.out' % opt.save_dir, 'w')
         logs.write(str(model) + '\n' + str(classifier) + '\n')
 
-    #criterion = nn.CrossEntropyLoss().cuda()
-    criterion = nn.CrossEntropyLoss()
+    criterion = nn.CrossEntropyLoss().cuda()
+    #criterion = nn.CrossEntropyLoss()
     
     optimizer = torch.optim.Adam(list(model.parameters()) + list(classifier.parameters()),
                                  lr=opt.lr, betas=(0.9, 0.999), 
